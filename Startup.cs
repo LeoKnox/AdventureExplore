@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AdventureExplore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdventureExplore
 {
@@ -24,6 +26,9 @@ namespace AdventureExplore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<MvcRoomContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MvcRoomContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
